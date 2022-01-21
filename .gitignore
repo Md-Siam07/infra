@@ -32,6 +32,8 @@ override.tf.json
 __pycache__/
 *.py[cod]
 *$py.class
+**.tfvars
+
 
 # C extensions
 *.so
