@@ -1,0 +1,34 @@
+---
+- name: Install FreeIPA
+  hosts: active_directory
+  become: true
+  tasks:
+    - name: Set hostname
+      shell:
+        cmd: "hostnamectl set-hostname ad.sidhulabs.ca"
+      name: Activate hostname
+      shell:
+        cmd: "hostname ad.sidhulabs.ca"
+    - name: Add hostname to /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        line: "10.10.1.20 ad.sidhulabs.ca active-directory ad"
+    - name: Enable firewall passthrough for freeipa
+      shell:
+        cmd: "firewall-cmd --add-service={http,https,dns,ntp,freeipa-ldap,freeipa-ldaps} --permanent"
+    - name: Reload firewall
+      shell:
+        cmd: "firewall-cmd --reload"
+    - name: Install free ipa 
+      shell:
+        cmd: "yum module install idm:DL1/server"
+    - name: Get kerb ticket
+      shell:
+        cmd: "kinit admin"
+    - name: Set default shell to bash
+      shell:
+        cmd: "ipa config-mod --defaultshell=/bin/bash"
+
+    
+    
+    

@@ -1,0 +1,18 @@
+---
+- name: Install Postgres
+  hosts: all
+  tasks:
+    - name: Install Postgres
+      docker_container:
+        name: postgres
+        image: postgres:latest
+        ports:
+          - "5432:5432"
+        restart_policy: unless-stopped
+        env:
+          POSTGRES_USER: "{{ user }}"
+          POSTGRES_PASSWORD: "{{ pass }}"
+          PGDATA: "/var/lib/postgresql/data/pgdata"
+        volumes:
+          - /opt/pgdata:/var/lib/postgresql/data/pgdata
+

@@ -1,0 +1,20 @@
+---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+spec:
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+  version: 7.15.2
+  count: 1
+  secureSettings:
+    - secretName: kibana-saved-objects-encrypted-key
+  elasticsearchRef:
+    name: elasticsearch
+  config:
+    xpack.fleet.agents.elasticsearch.host: "https://elasticsearch-es-http.elastic.svc:9200"
+    xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-agent-http.elastic.svc:8220"]
+  

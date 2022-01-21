@@ -1,0 +1,8 @@
+---
+- name: Setup k3s Master nodes
+  hosts: all
+  tasks:
+    - name: Install k3s
+      shell:
+        cmd: "curl -sfL https://get.k3s.io | sh -s - server --datastore-endpoint='postgres://k3s:co3Ey3WEfGmp@10.10.1.55:5432/k3s?sslmode=disable' --node-taint CriticalAddonsOnly=true:NoExecute --token K1080c1769a213143cc938b13202c84e6473089533c4f2d195e0d82a48c8bc14dea::server:1fe494c45367b2ebe6cf12eee34b1177 --tls-san 10.10.1.56 --write-kubeconfig-mode 644"
+    

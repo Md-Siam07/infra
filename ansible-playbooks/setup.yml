@@ -1,0 +1,71 @@
+---
+- name: Machine Setup 
+  hosts: all
+  become: true
+  tasks:
+    - name: Update all packages
+      apt: 
+        name: "*"
+        state: latest
+
+    - name: Enable password SSH
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication no'
+        line: PasswordAuthentication yes
+        backrefs: yes
+      tags:
+        - ssh
+
+    - name: Restart SSH service
+      service:
+        name: ssh
+        state: restarted
+      tags:
+        - ssh
+
+    - name: Install net-tools
+      apt: 
+        name: "net-tools"
+
+    - name: Install qemu guest agent
+      apt:
+        name: "qemu-guest-agent"
+      tags:
+        - qemu
+
+    - name: Install docker
+      apt: 
+        name: "docker.io"
+
+    - name: Install docker-compose
+      apt: 
+        name: "docker-compose"
+
+    - name: Add user to docker group
+      user:
+        name: "sidhu"
+        groups: "docker"
+        append: yes
+
+    # - name: Download elastic agent
+    #   unarchive: 
+    #     src: https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-7.14.1-linux-x86_64.tar.gz
+    #     dest: /home/sidhu
+    #     mode: "777"
+    #     remote_src: yes
+    #   tags:
+    #     - elastic
+
+    # - name: Install elastic agent 
+    #   command: 
+    #     cmd: ./elastic-agent install -f --url=https://10.10.1.32:8220 --enrollment-token=S1hSY3VIc0JYcHBQNFJSVktYTHQ6NjlDRWRIaEdUbzJuVjFKM2JFLTJzdw== --insecure 
+    #     chdir: /home/sidhu/elastic-agent-7.14.1-linux-x86_64
+    #   tags:
+    #     - elastic
+
+    # - name: Add host to AD
+    #   command:
+    #     cmd: ...
+    #   tags:
+    #     - ad
