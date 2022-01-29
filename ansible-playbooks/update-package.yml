@@ -1,0 +1,27 @@
+- name:  Update software
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Update apt
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+  
+  - name: Upgrade packages
+    apt:
+      name: "*"
+      state: latest
+
+  - name: Dist upgrade
+    apt:
+      upgrade: dist
+
+  - name: Remove old packages and no longer required dependencies
+    apt:
+      autoclean: yes
+      autoremove: yes
+
+  - name: Check if reboot required
+    stat:
+      path: /var/run/reboot-required
