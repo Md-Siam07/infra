@@ -4,7 +4,7 @@
 # BUILD: docker build --rm -t bigsidhu/docker-mlflow .
 # SOURCE: 
 
-FROM python:3.7-slim-buster
+FROM python:3.9-slim-buster
 LABEL maintainer="Ashton Sidhu"
 
 # Never prompt the user for choices on installation/configuration of packages
@@ -13,6 +13,7 @@ ENV TERM linux
 
 # MLFlow
 ARG MLFLOW_USER_HOME=/home/mlflow
+ARG MLFLOW_VERSION=1.23.1
 
 # Define en_US.
 ENV LANGUAGE en_US.UTF-8
@@ -22,7 +23,7 @@ ENV LC_CTYPE en_US.UTF-8
 ENV LC_MESSAGES en_US.UTF-8
 
 RUN useradd -ms /bin/bash -d ${MLFLOW_USER_HOME} mlflow \
-    && pip install mlflow \
+    && pip install mlflow==${MLFLOW_VERSION} \
     && pip install psycopg2-binary \
     && chown -R mlflow: ${MLFLOW_USER_HOME}
 
