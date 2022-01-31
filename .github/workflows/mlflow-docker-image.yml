@@ -34,6 +34,6 @@ jobs:
         with:
           context: docker-images/mlflow
           push: true
-          tags: bigsidhu/mlflow:${{ env.CONTAINER_VERSION }}
+          tags: bigsidhu/mlflow:${{ env.CONTAINER_VERSION }},bigsidhu/mlflow:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
