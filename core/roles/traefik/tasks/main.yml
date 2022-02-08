@@ -1,0 +1,16 @@
+- name: Copy config files to node
+  copy:
+    src: "{{ item }}"
+    dest: "$HOME"
+  loop:
+    - config.yml
+    - traefik.yml
+
+- name: Start Traefik with new config
+  docker_compose:
+    project_src: "$HOME"
+    recreate: always
+
+- assert:
+    that:
+      - "traefik.traefik.state.running"

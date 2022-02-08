@@ -1,0 +1,493 @@
+http:
+ #region routers 
+  routers:
+    overseer:
+      entryPoints:
+        - "https"
+      rule: "Host(`sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+      tls: {}
+      service: overseer
+    proxmox:
+      entryPoints:
+        - "https"
+      rule: "Host(`proxmox.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: proxmox
+    pihole:
+      entryPoints:
+        - "https"
+      rule: "Host(`pihole.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - addprefix-pihole
+        - default-whitelist
+      tls: {}
+      service: pihole
+    rancher:
+      entryPoints:
+        - "https"
+      rule: "Host(`rancher.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: rancher
+    kibana:
+      entryPoints:
+        - "https"
+      rule: "Host(`kibana.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: kibana
+    elastic:
+      entryPoints:
+        - "https"
+      rule: "Host(`elastic.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: elasticsearch
+    fleet:
+      entryPoints:
+        - "https"
+      rule: "Host(`fleet.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: fleet
+    plex:
+      entryPoints:
+        - "https"
+      rule: "Host(`plex.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: plex
+    nas:
+      entryPoints:
+        - "https"
+      rule: "Host(`nas.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: nas
+    jupyter:
+      entryPoints:
+        - "https"
+      rule: "Host(`jupyter.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: jupyter
+    freeipa:
+      entryPoints:
+        - "https"
+      rule: "Host(`ad.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+      tls: {}
+      service: ad
+    remote:
+      entryPoints:
+        - "https"
+      rule: "Host(`remote.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: remote
+    files:
+      entryPoints:
+        - "https"
+      rule: "Host(`files.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: files
+    tv:
+      entryPoints:
+        - "https"
+      rule: "Host(`tv.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: tv
+    movies:
+      entryPoints:
+        - "https"
+      rule: "Host(`movies.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: movies
+    music:
+      entryPoints:
+        - "https"
+      rule: "Host(`music.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: music
+    sab:
+      entrypoints:
+        - "https"
+      rule: "host(`sab.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: sab
+    bazarr:
+      entrypoints:
+        - "https"
+      rule: "host(`bazarr.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: bazarr
+    portainer:
+      entrypoints:
+        - "https"
+      rule: "host(`portainer.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: portainer
+    heimdall:
+      entrypoints:
+        - "https"
+      rule: "host(`home.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: heimdall
+    codeserver:
+      entrypoints:
+        - "https"
+      rule: "host(`code.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: codeserver
+    superset:
+      entrypoints:
+        - "https"
+      rule: "host(`superset.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: superset
+    prefect:
+      entrypoints:
+        - "https"
+      rule: "host(`prefect.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: prefect
+    prefect-graphql:
+      entrypoints:
+        - "https"
+      rule: "host(`prefect.sidhulabs.ca`) && PathPrefix(`/graphql`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: prefect-graphql
+    mlflow:
+      entrypoints:
+        - "https"
+      rule: "host(`mlflow.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: mlflow
+    realestatehub:
+      entrypoints:
+        - "https"
+      rule: "host(`realestate.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+      tls: {}
+      service: realestatehub
+    argocd:
+      entrypoints:
+        - "https"
+      rule: "host(`argo.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: argocd
+    tekton:
+      entrypoints:
+        - "https"
+      rule: "host(`tekton.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: tekton
+    minio:
+      entrypoints:
+        - "https"
+      rule: "host(`minio.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: minio
+    minio-console:
+      entrypoints:
+        - "https"
+      rule: "host(`minio-console.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: minio-console
+    calibre-web:
+      entrypoints:
+        - "https"
+      rule: "host(`books.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: calibre-web
+    orchest:
+      entrypoints:
+        - "https"
+      rule: "host(`orchest.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: orchest
+#endregion
+#region services
+  services:
+    overseer:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.29:5055"
+        passHostHeader: true
+    proxmox:
+      loadBalancer:
+        servers:
+          - url: "https://10.10.1.17:8006"
+        passHostHeader: true
+    pihole:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.50:80"
+        passHostHeader: true
+    rancher:
+      loadBalancer:
+        servers:
+          - url: "https://10.10.1.56:443"
+        passHostHeader: true
+    kibana:
+      loadBalancer:
+        servers:
+          - url: "https://10.10.1.56:443"
+        passHostHeader: true
+    elasticsearch:
+      loadBalancer:
+        servers:
+                - url: "https://10.10.1.56:9200"
+        passHostHeader: true
+    fleet:
+      loadBalancer:
+        servers:
+                - url: "https://10.10.1.56:8220"
+        passHostHeader: true
+    nas:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.29:5000"
+        passHostHeader: true
+    postgres:
+      loadBalancer:
+        servers:
+                - url: "10.10.1:55:5432"
+        passHostHeader: true
+    jupyter:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.10:8000"
+        passHostHeader: true
+    plex:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.29:32400"
+        passHostHeader: true
+    ad:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.20:80"
+        passHostHeader: true
+    remote:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.56:80"
+        passHostHeader: true
+    files:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.29:8080"
+        passHostHeader: true
+    tv:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.29:38001"
+        passHostHeader: true
+    movies:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.29:38002"
+        passHostHeader: true
+    music:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.29:8686"
+        passHostHeader: true
+    sab:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.29:38000"
+        passHostHeader: true
+    bazarr:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.29:6767"
+        passHostHeader: true
+    portainer:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.29:9000"
+        passHostHeader: true
+    heimdall:
+      loadBalancer:
+        servers:
+                - url: "https://10.10.1.56:443"
+        passHostHeader: true
+    codeserver:
+      loadBalancer:
+        servers:
+                - url: "http://10.10.1.10:8081"
+        passHostHeader: true
+    superset:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.56:80"
+        passHostHeader: true
+    prefect:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.10:8080"
+        passHostHeader: true
+    prefect-graphql:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.10:4200"
+        passHostHeader: true
+    mlflow:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.56:80"
+        passHostHeader: true
+    realestatehub:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.56:80"
+        passHostHeader: true
+    argocd:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.56:80"
+        passHostHeader: true
+    tekton:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.56:80"
+        passHostHeader: true
+    minio:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.29:9002"
+        passHostHeader: true
+    minio-console:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.29:9001"
+        passHostHeader: true
+    calibre-web:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.29:8083"
+        passHostHeader: true
+    orchest:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.10:8082"
+        passHostHeader: true
+#endregion
+  middlewares:
+    addprefix-pihole:
+      addPrefix:
+        prefix: "/admin"
+    https-redirect:
+      redirectScheme:
+        scheme: https
+
+    default-headers:
+      headers:
+        frameDeny: true
+        sslRedirect: true
+        browserXssFilter: true
+        contentTypeNosniff: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 15552000
+        customFrameOptionsValue: SAMEORIGIN
+        customRequestHeaders:
+          X-Forwarded-Proto: https
+    
+
+    default-whitelist:
+      ipWhiteList:
+        sourceRange:
+        - "10.0.0.0/8"
+        - "172.16.0.0/16"
+        - "192.168.0.0/16"
+
+    secured:
+      chain:
+        middlewares:
+        - default-whitelist
+        - default-headers

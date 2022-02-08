@@ -1,0 +1,4 @@
+- name: Run Traefik
+  hosts: revproxy
+  roles:
+    - traefik
