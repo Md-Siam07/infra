@@ -24,7 +24,7 @@ ENV LC_MESSAGES en_US.UTF-8
 
 RUN useradd -ms /bin/bash -d ${MLFLOW_USER_HOME} mlflow \
     && pip install mlflow==${MLFLOW_VERSION} \
-    && pip install psycopg2-binary \
+    && pip install psycopg2-binary boto3 \
     && chown -R mlflow: ${MLFLOW_USER_HOME}
 
 EXPOSE 5000
