@@ -5,7 +5,7 @@ metadata:
   name: fleet-server
   namespace: elastic
 spec:
-  version: 7.15.2
+  version: 7.17.0
   http:
     service:
       spec:
@@ -30,6 +30,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: elastic-agent
+  namespace: elastic
 rules:
 - apiGroups: [""] # "" indicates the core API group
   resources:
