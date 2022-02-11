@@ -25,6 +25,20 @@ spec:
         automountServiceAccountToken: true
         securityContext:
           runAsUser: 0
+        # temporary until eck 2.0
+        containers:
+        - name: agent
+          command:
+          - bash
+          - -c 
+          - |
+            #!/usr/bin/env bash
+            set -e
+            if [[ -f /mnt/elastic-internal/elasticsearch-association/default/elasticsearch-quickstart/certs/ca.crt ]]; then
+              cp /mnt/elastic-internal/elasticsearch-association/default/elasticsearch-quickstart/certs/ca.crt /usr/local/share/ca-certificates
+              update-ca-certificates
+            fi
+            /usr/bin/tini -- /usr/local/bin/docker-entrypoint -e
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
