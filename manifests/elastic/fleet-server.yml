@@ -34,19 +34,23 @@ metadata:
 rules:
 - apiGroups: [""] # "" indicates the core API group
   resources:
+  - namespaces
   - pods
   - nodes
+  - nodes/metrics
+  - nodes/proxy
+  - nodes/stats
+  - events
   verbs:
   - get
   - watch
   - list
-- apiGroups: ["coordination.k8s.io"]
-  resources:
-  - leases
+- nonResourceURLs:
+  - /metrics
   verbs:
   - get
-  - create
-  - update
+  - watch
+  - list
 ---
 apiVersion: v1
 kind: ServiceAccount
