@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: remote
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: apps.deployment-default-remote
+  template:
+    spec:
+      affinity: {}
+      containers:
+      - image: guacamole/guacd
+        imagePullPolicy: Always
+        name: guacd
+        ports:
+        - containerPort: 4822
+          name: 8080tcp
+          protocol: TCP
+      - env:
+        - name: GUACD_HOSTNAME
+          value: guacd
+        - name: GUACD_PORT
+          value: "4822"
+        - name: POSTGRES_HOSTNAME
+          value: 10.10.1.55
+        - name: POSTGRES_DATABASE
+          value: sidhulabs
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              key: pg_user
+              name: postgres
+              optional: false
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: pg_pw
+              name: postgres
+              optional: false
+        image: guacamole/guacamole
+        imagePullPolicy: Always
+        name: guacamole
+        ports:
+        - containerPort: 8080
+          name: tcp8080
+          protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
