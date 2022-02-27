@@ -105,6 +105,7 @@ http:
       rule: "Host(`remote.sidhulabs.ca`)"
       middlewares:
         - default-headers
+        - addprefix-remote
         - default-whitelist
       tls: {}
       service: remote
@@ -460,6 +461,9 @@ http:
     addprefix-pihole:
       addPrefix:
         prefix: "/admin"
+    addprefix-remote:
+      addPrefix:
+        prefix: "/guacamole"
     https-redirect:
       redirectScheme:
         scheme: https
