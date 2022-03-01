@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heartbeat
+  namespace: elastic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: heartbeat
+  template:
+    metadata:
+      labels:
+        name: heartbeat
+    spec:
+      containers:
+      - image: docker.elastic.co/beats/heartbeat:8.0.0
+        name: heartbeat
+        imagePullPolicy: Always
+        env:
+        - name: ES_HOSTS
+          value: "['https://elastic.sidhulabs.ca:443']"
+        - name: ES_USER
+          valueFrom:
+            secretKeyRef:
+              name: creds
+              key: username
+        - name: ES_PASS
+          valueFrom:
+            secretKeyRef:
+              name: creds
+              key: password
+        volumeMounts:
+        - name: config-volume
+          mountPath: /usr/share/heartbeat/heartbeat.yml
+          subPath: heartbeat.yml
+      volumes:
+      - name: config-volume
+        configMap:
+          name: heartbeat-config
+      dnsPolicy: Default
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: heartbeat-config
+  namespace: elastic
+data:
+  heartbeat.yml: |
+    heartbeat.monitors:
+      - type: http
+        name: Homelab services
+        schedule: "@every 15m"
+        urls:
+          - https://books.sidhulabs.ca
+          - https://plex.sidhulabs.ca
+          - https://sidhulabs.ca
+          - https://tv.sidhulabs.ca
+          - https://mlflow.sidhulabs.ca
+          - https://movies.sidhulabs.ca
+          - https://home.sidhulabs.ca
+          - https://pihole.sidhulabs.ca
+          - https://minio-console.sidhulabs.ca
+          - https://prefect.sidhulabs.ca
+          - https://nas.sidhulabs.ca
+          - https://rancher.sidhulabs.ca
+          - https://portainer.sidhulabs.ca
+          - https://remote.sidhulabs.ca
+          - https://superset.sidhulabs.ca
+          - https://jupyter.sidhulabs.ca
+          - https://sab.sidhulabs.ca
+        check.response.status: [200, 302, 307, 401]
+        
+
+    output.elasticsearch:
+      hosts: '${ES_HOSTS:}'
+      username: '${ES_USER:}'
+      password: '${ES_PASS:}'
+
+    setup.kibana:
+      host: https://kibana.sidhulabs.ca
