@@ -21,6 +21,7 @@ spec:
         - name: sysctl
           securityContext:
             privileged: true
+            runAsUser: 0
           command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
 
   - name: data
@@ -33,6 +34,7 @@ spec:
           - name: sysctl
             securityContext:
               privileged: true
+              runAsUser: 0
             command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
     volumeClaimTemplates:
       - metadata:
