@@ -1,0 +1,3 @@
+agent_version: 8.2.0
+fleet_url: https://fleet-server-agent-http.elastic.svc:8220
+enrollment_token: MHhMcVQzMEJUenF3RzN0MEcyWlQ6S2tkbC1hdFBRTWlSeDJTektHeGNzQQ==

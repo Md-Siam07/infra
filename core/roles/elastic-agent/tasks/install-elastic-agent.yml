@@ -1,0 +1,12 @@
+---
+- name: Download elastic agent
+  unarchive:
+    src: https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-{{ agent_version }}-linux-x86_64.tar.gz
+    dest: /home/sidhu
+    mode: "777"
+    remote_src: yes
+
+- name: Install elastic agent
+  command:
+    cmd: ./elastic-agent install -f --url={{ fleet_url }} --enrollment-token={{ enrollment_token }} --insecure
+    chdir: /home/sidhu/elastic-agent-{{ agent_version }}-linux-x86_64

@@ -1,0 +1,5 @@
+- name: Install Elastic Agent
+  hosts: all
+  become: true
+  roles:
+    - elastic-agent
