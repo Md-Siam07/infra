@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: draw
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: draw
+  template:
+    metadata:
+      labels:
+        app: draw
+    spec:
+      containers:
+        - image: excalidraw/excalidraw
+          name: draw
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 5000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          ports:
+            - containerPort: 5000
+              name: 5000tcpport
+      restartPolicy: Always
+      dnsPolicy: Default

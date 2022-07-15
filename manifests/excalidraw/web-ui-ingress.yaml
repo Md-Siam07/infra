@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: draw
+  namespace: default
+spec:
+  rules:
+  - host: draw.sidhulabs.ca
+    http:
+      paths:
+      - backend:
+          service:
+            name: draw
+            port:
+              number: 5000
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.10.1.51
+    - ip: 10.10.1.52
+    - ip: 10.10.1.53
+    - ip: 10.10.1.54
