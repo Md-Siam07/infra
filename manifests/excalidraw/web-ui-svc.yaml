@@ -5,8 +5,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 8501
-      targetPort: 8501
-      name: tcpport5601
+    - port: 5000
+      targetPort: 80
+      name: tcpport5000
   selector:
     app: draw

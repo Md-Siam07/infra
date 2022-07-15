@@ -279,15 +279,15 @@ http:
         - default-whitelist
       tls: {}
       service: calibre-web
-    orchest:
+    draw:
       entrypoints:
         - "https"
-      rule: "host(`orchest.sidhulabs.ca`)"
+      rule: "host(`draw.sidhulabs.ca`)"
       middlewares:
         - default-headers
         - default-whitelist
       tls: {}
-      service: orchest
+      service: draw
 #endregion
 #region services
   services:
@@ -451,10 +451,10 @@ http:
         servers:
           - url: "http://10.10.1.29:8083"
         passHostHeader: true
-    orchest:
+    draw:
       loadBalancer:
         servers:
-          - url: "http://10.10.1.10:8082"
+          - url: "http://10.10.1.56:80"
         passHostHeader: true
 #endregion
   middlewares:
