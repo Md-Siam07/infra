@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: real-estate-hub
+  name: draw
 spec:
   type: ClusterIP
   ports:
