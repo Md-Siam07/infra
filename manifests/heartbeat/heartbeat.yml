@@ -66,7 +66,6 @@ data:
           - https://prefect.sidhulabs.ca
           - https://nas.sidhulabs.ca
           - https://rancher.sidhulabs.ca
-          - https://portainer.sidhulabs.ca
           - https://remote.sidhulabs.ca
           - https://superset.sidhulabs.ca
           - https://jupyter.sidhulabs.ca
