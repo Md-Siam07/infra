@@ -5,7 +5,7 @@ metadata:
   name: fleet-server
   namespace: elastic
 spec:
-  version: 8.2.0
+  version: 8.4.2
   http:
     service:
       spec:
