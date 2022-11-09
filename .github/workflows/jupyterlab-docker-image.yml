@@ -1,13 +1,12 @@
-name: Build MLFlow Docker Image
+name: Build JupyterLab Docker Image
 
 on:
   workflow_dispatch:
   push:
     branches: [ main ]
     paths:
-      - "mlflow/**"
-      - "!mlflow/README.md"
-      - "!mlflow/docker-compose.yml"
+      - "docker-images/jupyterlab/**"
+      - "!docker-images/jupyterlab/README.md"
 
 jobs:
   build:
@@ -28,8 +27,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: mlflow
+          context: jupyterlab
           push: true
-          tags: bigsidhu/mlflow:latest,bigsidhu/mlflow:${{ github.sha }}
+          tags: bigsidhu/jupyter-notebook:latest,bigsidhu/jupyter-notebook:${{ github.sha }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
