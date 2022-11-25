@@ -1,4 +1,4 @@
-.PHONY: heartbeat guacamole prefect
+.PHONY: heartbeat guacamole prefect jupyter
 
 login:
 	argocd login argo.sidhulabs.ca
@@ -15,8 +15,12 @@ guacamole:
 prefect:
 	argocd app create prefect --repo https://github.com/sidhulabs/infra.git --path manifests/prefect --dest-server https://kubernetes.default.svc --dest-namespace prefect --sync-policy auto --auto-prune
 
+jupyter:
+	argocd app create jupyter --repo https://github.com/sidhulabs/infra.git --path manifests/jupyter --dest-server https://kubernetes.default.svc --dest-namespace jupyter --sync-policy auto --auto-prune
+
 install:
 	kubectl create namespace argocd
 	kubectl create namespace prefect
+	kubectl create namespace jupyter
 	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 	brew install argocd
