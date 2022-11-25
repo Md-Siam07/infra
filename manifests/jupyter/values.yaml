@@ -68,14 +68,14 @@ jupyterhub:
       dynamic:
         storageClass: longhorn
 
-    prePuller:
-      extraImages:
-        pyspark:
-          name: jupyter/all-spark-notebook
-          tag: latest
-        sidhulabs:
-          name: bigsidhu/jupyter-notebook
-          tag: latest
-        datascience:
-          name: jupyter/datascience-notebook
-          tag: latest
+  prePuller:
+    extraImages:
+      pyspark:
+        name: jupyter/all-spark-notebook
+        tag: latest
+      sidhulabs:
+        name: bigsidhu/jupyter-notebook
+        tag: latest
+      datascience:
+        name: jupyter/datascience-notebook
+        tag: latest
