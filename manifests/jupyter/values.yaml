@@ -9,6 +9,10 @@
 # Available chart versions: https://jupyterhub.github.io/helm-chart/
 #
 
+db:
+  pvc:
+    storageClassName: longhorn
+
 singleuser:
   storage:
     dynamic:
