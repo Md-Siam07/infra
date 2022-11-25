@@ -289,12 +289,12 @@ http:
     postgres:
       loadBalancer:
         servers:
-                - url: "10.10.1:55:5432"
+          - url: "10.10.1:55:5432"
         passHostHeader: true
     jupyter:
       loadBalancer:
         servers:
-                - url: "http://10.10.1.10:8000"
+          - url: "http://10.10.1.56:80"
         passHostHeader: true
     plex:
       loadBalancer:
@@ -304,37 +304,37 @@ http:
     ad:
       loadBalancer:
         servers:
-                - url: "http://10.10.1.20:80"
+          - url: "http://10.10.1.20:80"
         passHostHeader: true
     remote:
       loadBalancer:
         servers:
-                - url: "http://10.10.1.56:80"
+          - url: "http://10.10.1.56:80"
         passHostHeader: true
     files:
       loadBalancer:
         servers:
-                - url: "http://10.10.1.29:8080"
+          - url: "http://10.10.1.29:8080"
         passHostHeader: true
     tv:
       loadBalancer:
         servers:
-                - url: "http://10.10.1.29:38001"
+          - url: "http://10.10.1.29:38001"
         passHostHeader: true
     movies:
       loadBalancer:
         servers:
-                - url: "http://10.10.1.29:38002"
+          - url: "http://10.10.1.29:38002"
         passHostHeader: true
     sab:
       loadBalancer:
         servers:
-                - url: "http://10.10.1.29:38000"
+          - url: "http://10.10.1.29:38000"
         passHostHeader: true
     bazarr:
       loadBalancer:
         servers:
-                - url: "http://10.10.1.29:6767"
+          - url: "http://10.10.1.29:6767"
         passHostHeader: true
     heimdall:
       loadBalancer:
