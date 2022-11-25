@@ -20,8 +20,6 @@ jupyterhub:
     pathType: ImplementationSpecific
     hosts:
       - jupyter.sidhulabs.ca
-    annotations:
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
 
   proxy:
     https:
