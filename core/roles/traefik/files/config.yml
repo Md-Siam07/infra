@@ -409,7 +409,7 @@ http:
     prefect:
       loadBalancer:
         servers:
-          - url: "http://10.10.1.10:8080"
+          - url: "http://10.10.1.56:80"
         passHostHeader: true
     prefect-graphql:
       loadBalancer:

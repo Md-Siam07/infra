@@ -10,7 +10,8 @@
   docker_compose:
     project_src: "$HOME"
     recreate: always
+  register: output
 
 - assert:
     that:
-      - "traefik.traefik.state.running"
+      - "output.services.traefik.traefik.state.running"
