@@ -17,7 +17,7 @@ jupyterhub:
 
   ingress:
     enabled: true
-    pathTye: ImplementationSpecific
+    pathType: ImplementationSpecific
     hosts:
       - jupyter.sidhulabs.ca
 
