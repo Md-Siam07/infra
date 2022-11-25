@@ -40,6 +40,42 @@ jupyterhub:
     secretToken: "b8c23540dec3d1e38f38fa23be4f3ef94d0d4f1b5a3a83b9072253218ff4db25"
 
   singleuser:
+    image:
+      name: jupyter/minimal-notebook
+      tag: latest
+      pullPolicy: Always
+    profileList:
+      - display_name: "Minimal environment"
+        description: "To avoid too much bells and whistles: Python."
+        default: true
+      - display_name: "Datascience environment"
+        description: "If you want the additional bells and whistles: Python, R, and Julia."
+        kubespawner_override:
+          image: jupyter/datascience-notebook:latest
+      - display_name: "Spark environment"
+        description: "The Jupyter Stacks pyspark image!"
+        kubespawner_override:
+          image: jupyter/all-spark-notebook:latest
+      - display_name: "Spark environment"
+        description: "The Jupyter Stacks pyspark image!"
+        kubespawner_override:
+          image: jupyter/pyspark-notebook:latest
+      - display_name: "Sidhulabs environment"
+        description: "The custom Sidhulabs environment with Deep Learning libraries!"
+        kubespawner_override:
+          image: bigsidhu/jupyter-notebook:latest
     storage:
       dynamic:
         storageClass: longhorn
+
+    prePuller:
+      extraImages:
+        pyspark:
+          name: jupyter/all-spark-notebook
+          tag: latest
+        sidhulabs:
+          name: bigsidhu/jupyter-notebook
+          tag: latest
+        datascience:
+          name: jupyter/datascience-notebook
+          tag: latest
