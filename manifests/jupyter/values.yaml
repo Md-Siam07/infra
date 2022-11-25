@@ -55,10 +55,6 @@ jupyterhub:
       - display_name: "Spark environment"
         description: "The Jupyter Stacks pyspark image!"
         kubespawner_override:
-          image: jupyter/all-spark-notebook:latest
-      - display_name: "Spark environment"
-        description: "The Jupyter Stacks pyspark image!"
-        kubespawner_override:
           image: jupyter/pyspark-notebook:latest
       - display_name: "Sidhulabs environment"
         description: "The custom Sidhulabs environment with Deep Learning libraries!"
