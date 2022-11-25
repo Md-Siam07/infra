@@ -9,11 +9,21 @@
 # Available chart versions: https://jupyterhub.github.io/helm-chart/
 #
 
-db:
-  pvc:
-    storageClassName: longhorn
+jupyterhub:
+  hub:
+    db:
+      pvc:
+        storageClassName: longhorn
 
-singleuser:
-  storage:
-    dynamic:
-      storageClass: longhorn
+  ingress:
+    enabled: true
+
+  proxy:
+    service:
+      type: ClusterIP
+    secretToken: "b8c23540dec3d1e38f38fa23be4f3ef94d0d4f1b5a3a83b9072253218ff4db25"
+
+  singleuser:
+    storage:
+      dynamic:
+        storageClass: longhorn
