@@ -163,15 +163,6 @@ http:
         - default-whitelist
       tls: {}
       service: bazarr
-    portainer:
-      entrypoints:
-        - "https"
-      rule: "host(`portainer.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: portainer
     heimdall:
       entrypoints:
         - "https"
@@ -181,15 +172,6 @@ http:
         - default-whitelist
       tls: {}
       service: heimdall
-    codeserver:
-      entrypoints:
-        - "https"
-      rule: "host(`code.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: codeserver
     superset:
       entrypoints:
         - "https"
@@ -208,15 +190,15 @@ http:
         - default-whitelist
       tls: {}
       service: prefect
-    prefect-graphql:
+    prefect-api:
       entrypoints:
         - "https"
-      rule: "host(`prefect.sidhulabs.ca`) && PathPrefix(`/graphql`)"
+      rule: "host(`prefect.sidhulabs.ca`) && PathPrefix(`/api`)"
       middlewares:
         - default-headers
         - default-whitelist
       tls: {}
-      service: prefect-graphql
+      service: prefect-api
     mlflow:
       entrypoints:
         - "https"
@@ -386,20 +368,10 @@ http:
         servers:
                 - url: "http://10.10.1.29:6767"
         passHostHeader: true
-    portainer:
-      loadBalancer:
-        servers:
-                - url: "http://10.10.1.29:9000"
-        passHostHeader: true
     heimdall:
       loadBalancer:
         servers:
-                - url: "https://10.10.1.56:443"
-        passHostHeader: true
-    codeserver:
-      loadBalancer:
-        servers:
-                - url: "http://10.10.1.10:8081"
+          - url: "https://10.10.1.56:443"
         passHostHeader: true
     superset:
       loadBalancer:

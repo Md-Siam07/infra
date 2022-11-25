@@ -1,0 +1,24 @@
+---
+- name: Copy load balancer config
+  copy:
+    src: nginx.conf
+    dest: $HOME 
+
+- name: Start docker nginx
+  docker_container:
+    name: nginx
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+      - 4200:4200
+      - 6443:6443
+      - 8220:8220
+      - 9200:9200
+    restart_policy: unless-stopped
+    volumes: /home/sidhu/nginx.conf:/etc/nginx/nginx.conf
+  register: output
+
+- assert:
+    that:
+      - "output.container.State.Running"

@@ -3,3 +3,6 @@ core:
     revproxy: 
       hosts:
         revproxy0: {ansible_host: 10.10.1.57}
+    load_balancers:
+      hosts:
+        load_balancers0: {ansible_host: 10.10.1.56}

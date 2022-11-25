@@ -21,7 +21,11 @@ spec:
         command: ["prefect", "orion", "start", "--host", "0.0.0.0", "--log-level", "WARNING"]
         imagePullPolicy: "IfNotPresent"
         ports:
-        - containerPort: 4200
+          - containerPort: 4200
+        env:
+          - name: PREFECT_API_URL
+            value: https://prefect.sidhulabs.ca:4200/api
+          
 ---
 apiVersion: v1
 kind: Service

@@ -1,0 +1,4 @@
+- name: Run Traefik
+  hosts: load_balancers
+  roles:
+    - nginx

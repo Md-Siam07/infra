@@ -14,4 +14,4 @@
 
 - assert:
     that:
-      - "output.services.traefik.traefik.state.running"
+      - "services.traefik.traefik.state.running"
