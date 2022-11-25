@@ -23,7 +23,7 @@ jupyterhub:
         allowed_groups:
           - cn=jupyter,cn=groups,cn=accounts,dc=sidhulabs,dc=ca
         server_address: ad.sidhulabs.ca
-        
+        use_ssl: true
 
   ingress:
     enabled: true
