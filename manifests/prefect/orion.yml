@@ -24,7 +24,7 @@ spec:
           - containerPort: 4200
         env:
           - name: PREFECT_API_URL
-            value: https://prefect.sidhulabs.ca:4200/api
+            value: https://prefect.sidhulabs.ca/api
           
 ---
 apiVersion: v1
