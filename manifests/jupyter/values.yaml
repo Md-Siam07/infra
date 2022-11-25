@@ -24,6 +24,7 @@ jupyterhub:
           - cn=jupyter,cn=groups,cn=accounts,dc=sidhulabs,dc=ca
         server_address: ad.sidhulabs.ca
         use_ssl: true
+        server_port: 636
 
   ingress:
     enabled: true
