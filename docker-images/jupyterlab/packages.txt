@@ -2,7 +2,6 @@ xgboost
 mlflow
 imbalanced-learn 
 textblob 
-pyodbc 
 xeus-python 
 notebook
 diagrams 
@@ -25,3 +24,4 @@ statsmodels
 transformers
 elasticsearch-dsl
 eland
+sidhulabs
