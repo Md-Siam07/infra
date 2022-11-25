@@ -1,4 +1,4 @@
-.PHONY: heartbeat guacamole
+.PHONY: heartbeat guacamole prefect
 
 login:
 	argocd login argo.sidhulabs.ca
@@ -11,6 +11,10 @@ heartbeat:
 
 guacamole:
 	argocd app create guacamole --repo https://github.com/sidhulabs/infra.git --path manifests/guacamole --dest-server https://kubernetes.default.svc --dest-namespace default --sync-policy auto --auto-prune
+
+prefect:
+	kubectl create namespace prefect
+	argocd app create guacamole --repo https://github.com/sidhulabs/infra.git --path manifests/prefect --dest-server https://kubernetes.default.svc --dest-namespace prefect --sync-policy auto --auto-prune
 
 install:
 	kubectl create namespace argocd
