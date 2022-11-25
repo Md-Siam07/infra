@@ -136,15 +136,6 @@ http:
         - default-whitelist
       tls: {}
       service: movies
-    music:
-      entryPoints:
-        - "https"
-      rule: "Host(`music.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: music
     sab:
       entrypoints:
         - "https"
@@ -190,15 +181,6 @@ http:
         - default-whitelist
       tls: {}
       service: prefect
-    prefect-api:
-      entrypoints:
-        - "https"
-      rule: "host(`prefect.sidhulabs.ca`) && PathPrefix(`/api`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: prefect-api
     mlflow:
       entrypoints:
         - "https"
@@ -225,15 +207,6 @@ http:
         - default-whitelist
       tls: {}
       service: argocd
-    tekton:
-      entrypoints:
-        - "https"
-      rule: "host(`tekton.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: tekton
     minio:
       entrypoints:
         - "https"
@@ -353,11 +326,6 @@ http:
         servers:
                 - url: "http://10.10.1.29:38002"
         passHostHeader: true
-    music:
-      loadBalancer:
-        servers:
-                - url: "http://10.10.1.29:8686"
-        passHostHeader: true
     sab:
       loadBalancer:
         servers:
@@ -383,11 +351,6 @@ http:
         servers:
           - url: "http://10.10.1.56:80"
         passHostHeader: true
-    prefect-graphql:
-      loadBalancer:
-        servers:
-          - url: "http://10.10.1.10:4200"
-        passHostHeader: true
     mlflow:
       loadBalancer:
         servers:
@@ -399,11 +362,6 @@ http:
           - url: "http://10.10.1.56:80"
         passHostHeader: true
     argocd:
-      loadBalancer:
-        servers:
-          - url: "http://10.10.1.56:80"
-        passHostHeader: true
-    tekton:
       loadBalancer:
         servers:
           - url: "http://10.10.1.56:80"
