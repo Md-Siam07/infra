@@ -13,10 +13,10 @@ guacamole:
 	argocd app create guacamole --repo https://github.com/sidhulabs/infra.git --path manifests/guacamole --dest-server https://kubernetes.default.svc --dest-namespace default --sync-policy auto --auto-prune
 
 prefect:
-	kubectl create namespace prefect
-	argocd app create guacamole --repo https://github.com/sidhulabs/infra.git --path manifests/prefect --dest-server https://kubernetes.default.svc --dest-namespace prefect --sync-policy auto --auto-prune
+	argocd app create prefect --repo https://github.com/sidhulabs/infra.git --path manifests/prefect --dest-server https://kubernetes.default.svc --dest-namespace prefect --sync-policy auto --auto-prune
 
 install:
 	kubectl create namespace argocd
+	kubectl create namespace prefect
 	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 	brew install argocd
