@@ -8,10 +8,10 @@
   docker_container:
     name: nginx
     image: nginx:latest
+    restart: yes
     ports:
       - 80:80
       - 443:443
-      - 4200:4200
       - 6443:6443
       - 8220:8220
       - 9200:9200
