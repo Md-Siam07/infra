@@ -15,15 +15,36 @@ spec:
         app: mage
     spec:
       containers:
-      - name: mage
-        image: mageai/mageai:latest
-        command: ["mage", "start", "pipelines"]
-        imagePullPolicy: "Always"
-        ports:
-          - containerPort: 6789
-        volumeMounts:
-        - name: mage-data
-          mountPath: /home/src
+        - name: mage
+          image: mageai/mageai:latest
+          command: ["mage", "start", "pipelines"]
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 6789
+          volumeMounts:
+          - name: mage-data
+            mountPath: /home/src
+        - env:
+          - name: TWILIO_ACCOUNT_SID
+            valueFrom:
+              secretKeyRef:
+                key: account_sid
+                name: twilio
+          - name: TWILIO_AUTH_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: auth_token
+                name: twilio
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                key: AWS_ACCESS_KEY_ID
+                name: minio-keys
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                key: AWS_SECRET_ACCESS_KEY 
+                name: minio-keys
       volumes:
         - name: mage-data
           persistentVolumeClaim:
