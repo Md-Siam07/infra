@@ -77,10 +77,4 @@ spec:
       storage: 214748364800m
   storageClassName: longhorn
   volumeMode: Filesystem
-  volumeName: mage-data
-status:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: 206Mi
-  phase: Bound
+  volumeName: pvc-6ac5a07b-fd5c-41e2-85e2-26282caef5f4
