@@ -15,14 +15,13 @@ jupyterhub:
       pvc:
         storageClassName: longhorn
     config:
+      GitHubOAuthenticator:
+        allowed_organizations:
+          - sidhulabs
+        scope:
+          - read:org
       JupyterHub:
-        authenticator_class: ldapauthenticator.LDAPAuthenticator
-      LDAPAuthenticator:
-        bind_dn_template:
-          - uid={username},cn=users,cn=accounts,dc=sidhulabs,dc=ca
-        allowed_groups:
-          - cn=jupyter,cn=groups,cn=accounts,dc=sidhulabs,dc=ca
-        server_address: ad.sidhulabs.ca
+        authenticator_class: github
 
   ingress:
     enabled: true
