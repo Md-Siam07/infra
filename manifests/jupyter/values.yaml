@@ -15,13 +15,11 @@ jupyterhub:
       pvc:
         storageClassName: longhorn
     config:
-      GitHubOAuthenticator:
-        allowed_organizations:
-          - sidhulabs
-        scope:
-          - read:org
-      JupyterHub:
-        authenticator_class: github
+      Authenticor:
+        admin_users:
+          - asidhu
+        allowed_users:
+          - asidhu
 
   ingress:
     enabled: true
