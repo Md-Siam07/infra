@@ -18,6 +18,8 @@ jupyterhub:
       Authenticator:
         admin_users:
           - asidhu
+        allowed_users:
+          - asidhu
 
   ingress:
     enabled: true
