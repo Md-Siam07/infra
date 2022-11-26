@@ -20,8 +20,8 @@ jupyterhub:
           - asidhu
         allowed_users:
           - asidhu
-    JupyterHub:
-      authenticator_class: dummy
+      JupyterHub:
+        authenticator_class: dummy
 
   ingress:
     enabled: true
