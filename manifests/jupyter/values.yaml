@@ -18,6 +18,10 @@ jupyterhub:
       Authenticor:
         admin_users:
           - asidhu
+        allowed_users:
+          - asidhu
+    JupyterHub:
+      authenticator_class: dummy
 
   ingress:
     enabled: true
