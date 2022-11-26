@@ -30,21 +30,25 @@ spec:
             secretKeyRef:
               key: account_sid
               name: twilio
+              optional: false
         - name: TWILIO_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
               key: auth_token
               name: twilio
+              optional: false
         - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
               key: AWS_ACCESS_KEY_ID
               name: minio-keys
+              optional: false
         - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
               key: AWS_SECRET_ACCESS_KEY 
               name: minio-keys
+              optional: false
       volumes:
         - name: mage-data
           persistentVolumeClaim:
