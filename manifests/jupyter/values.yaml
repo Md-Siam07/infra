@@ -15,15 +15,9 @@ jupyterhub:
       pvc:
         storageClassName: longhorn
     config:
-      Authenticor:
+      Authenticator:
         admin_users:
           - asidhu
-        allowed_users:
-          - asidhu
-      DummyAuthenticator:
-        password: secret 
-      JupyterHub:
-        authenticator_class: dummy
 
   ingress:
     enabled: true
