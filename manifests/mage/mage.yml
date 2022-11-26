@@ -64,4 +64,23 @@ status:
     - ip: 10.10.1.52
     - ip: 10.10.1.53
     - ip: 10.10.1.54
-
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mage-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 214748364800m
+  storageClassName: longhorn
+  volumeMode: Filesystem
+  volumeName: mage-data
+status:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 206Mi
+  phase: Bound
