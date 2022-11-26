@@ -20,6 +20,8 @@ jupyterhub:
           - asidhu
         allowed_users:
           - asidhu
+      DummyAuthenticator:
+        password: secret 
       JupyterHub:
         authenticator_class: dummy
 
