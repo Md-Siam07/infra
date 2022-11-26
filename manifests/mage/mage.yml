@@ -24,7 +24,7 @@ spec:
         volumeMounts:
         - name: mage-data
           mountPath: /home/src
-      - env:
+        env:
         - name: TWILIO_ACCOUNT_SID
           valueFrom:
             secretKeyRef:
