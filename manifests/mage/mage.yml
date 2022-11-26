@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mage
+  labels:
+    app: mage
+spec:
+  selector:
+    matchLabels:
+      app: mage
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: mage
+    spec:
+      containers:
+      - name: mage
+        image: mageai/mageai:latest
+        command: ["mage", "start", "pipelines"]
+        imagePullPolicy: "Always"
+        ports:
+          - containerPort: 6789
+        volumeMounts:
+        - name: mage-data
+          mountPath: /home/src
+      volumes:
+        - name: mage-data
+          persistentVolumeClaim:
+            claimName: mage-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mage
+  labels:
+    app: mage
+spec:
+  ports:
+    - port: 6789
+      protocol: TCP
+  selector:
+    app: mage
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mage
+spec:
+  rules:
+  - host: mage.sidhulabs.ca
+    http:
+      paths:
+      - backend:
+          service:
+            name: mage
+            port:
+              number: 6789
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.10.1.51
+    - ip: 10.10.1.52
+    - ip: 10.10.1.53
+    - ip: 10.10.1.54
+

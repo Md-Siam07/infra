@@ -243,6 +243,15 @@ http:
         - default-whitelist
       tls: {}
       service: draw
+    mage:
+      entrypoints:
+        - "https"
+      rule: "host(`mage.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: mage
 #endregion
 #region services
   services:
@@ -382,6 +391,11 @@ http:
           - url: "http://10.10.1.29:8083"
         passHostHeader: true
     draw:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.56:80"
+        passHostHeader: true
+    mage:
       loadBalancer:
         servers:
           - url: "http://10.10.1.56:80"
