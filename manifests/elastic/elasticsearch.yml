@@ -37,7 +37,8 @@ spec:
               runAsUser: 0
             command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
         containers:
-          - resources:
+          - name: elasticsearch-data 
+            resources:
               requests:
                 memory: 4Gi
     volumeClaimTemplates:
