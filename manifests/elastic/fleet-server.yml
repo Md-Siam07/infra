@@ -5,7 +5,7 @@ metadata:
   name: fleet-server
   namespace: elastic
 spec:
-  version: 8.4.2
+  version: 8.5.2
   http:
     service:
       spec:
@@ -70,23 +70,3 @@ roleRef:
   kind: ClusterRole
   name: elastic-agent
   apiGroup: rbac.authorization.k8s.io
-# ---
-# apiVersion: agent.k8s.elastic.co/v1alpha1
-# kind: Agent
-# metadata:
-#   name: elastic-agent
-#   namespace: elastic
-# spec:
-#   version: 7.15.1
-#   kibanaRef:
-#     name: kibana
-#   fleetServerRef:
-#     name: fleet-server
-#   mode: fleet
-#   daemonSet:
-#     podTemplate:
-#       spec:
-#         serviceAccountName: elastic-agent
-#         automountServiceAccountToken: true
-#         securityContext:
-#           runAsUser: 0

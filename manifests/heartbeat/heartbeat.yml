@@ -15,7 +15,7 @@ spec:
         name: heartbeat
     spec:
       containers:
-      - image: docker.elastic.co/beats/heartbeat:8.4.2
+      - image: docker.elastic.co/beats/heartbeat:8.5.2
         name: heartbeat
         imagePullPolicy: Always
         env:
