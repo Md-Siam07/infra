@@ -59,8 +59,6 @@ jupyterhub:
     storage:
       dynamic:
         storageClass: longhorn
-    extraPodConfig:
-      dns_policy: "ClusterFirst"
 
   prePuller:
     extraImages:
