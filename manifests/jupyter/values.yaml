@@ -59,6 +59,9 @@ jupyterhub:
     storage:
       dynamic:
         storageClass: longhorn
+    networkPolicy:
+      egressAllowRules:
+        privateIPs: true
 
   prePuller:
     extraImages:
