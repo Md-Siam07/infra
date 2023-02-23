@@ -252,6 +252,15 @@ http:
         - default-whitelist
       tls: {}
       service: mage
+    sports:
+      entrypoints:
+        - "https"
+      rule: "host(`sports.sidhulabs.ca`)"
+      middlewares:
+        - default-headers
+        - default-whitelist
+      tls: {}
+      service: sports
 #endregion
 #region services
   services:
@@ -396,6 +405,11 @@ http:
           - url: "http://10.10.1.56:80"
         passHostHeader: true
     mage:
+      loadBalancer:
+        servers:
+          - url: "http://10.10.1.56:80"
+        passHostHeader: true
+    sports:
       loadBalancer:
         servers:
           - url: "http://10.10.1.56:80"
