@@ -196,6 +196,7 @@ http:
       rule: "host(`realestate.sidhulabs.ca`)"
       middlewares:
         - default-headers
+        - default-whitelist
       tls: {}
       service: realestatehub
     argocd:
@@ -258,7 +259,6 @@ http:
       rule: "host(`sports.sidhulabs.ca`)"
       middlewares:
         - default-headers
-        - default-whitelist
       tls: {}
       service: sports
 #endregion
