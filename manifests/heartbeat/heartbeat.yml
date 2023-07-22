@@ -15,7 +15,7 @@ spec:
         name: heartbeat
     spec:
       containers:
-      - image: docker.elastic.co/beats/heartbeat:8.5.2
+      - image: docker.elastic.co/beats/heartbeat:8.8.2
         name: heartbeat
         imagePullPolicy: Always
         env:
@@ -63,12 +63,9 @@ data:
           - https://home.sidhulabs.ca
           - https://pihole.sidhulabs.ca
           - https://minio-console.sidhulabs.ca
-          - https://prefect.sidhulabs.ca
           - https://nas.sidhulabs.ca
           - https://rancher.sidhulabs.ca
           - https://remote.sidhulabs.ca
-          - https://superset.sidhulabs.ca
-          - https://jupyter.sidhulabs.ca
           - https://sab.sidhulabs.ca
         check.response.status: [200, 302, 307, 401]
         
