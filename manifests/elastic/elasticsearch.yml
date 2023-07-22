@@ -25,7 +25,7 @@ spec:
           command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
 
   - name: data
-    count: 2
+    count: 1
     config:
       node.roles: ["data", "ingest", "ml", "transform", "remote_cluster_client"]
     podTemplate:
