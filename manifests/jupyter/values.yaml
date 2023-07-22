@@ -20,7 +20,8 @@ jupyterhub:
           - asidhu
         allowed_users:
           - asidhu
-          - sneha
+
+  # password is defined in argo helm parameters
 
   ingress:
     enabled: true
