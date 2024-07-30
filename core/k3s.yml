@@ -1,0 +1,6 @@
+- name: Create Kubernetes cluster
+  hosts:
+    - k3s_master
+    - k3s_minion
+  roles:
+    - k3s

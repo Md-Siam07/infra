@@ -1,3 +1,7 @@
+all:
+  vars:
+    control_plane_endpoint: 10.10.1.51
+
 core:
   children:
     revproxy: 
@@ -6,3 +10,11 @@ core:
     load_balancers:
       hosts:
         load_balancers0: {ansible_host: 10.10.1.56}
+    k3s_master:
+      hosts:
+        master0: {ansible_host: 10.10.1.51}
+        master1: {ansible_host: 10.10.1.54}
+    k3s_minion:
+      hosts:
+        minion0: {ansible_host: 10.10.1.52}
+        minion1: {ansible_host: 10.10.1.53}

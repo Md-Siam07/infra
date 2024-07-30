@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: changedetection
+  labels:
+    app: changedetection
+spec:
+  selector:
+    matchLabels:
+      app: changedetection
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: changedetection
+    spec:
+      containers:
+        - name: changedetection
+          image: ghcr.io/dgtlmoon/changedetection.io
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+          - name: changedetection-data
+            mountPath: /datastore
+          env:
+            - name: PLAYWRIGHT_DRIVER_URL
+              value: ws://playwright-chrome:3000
+            - name: HIDE_REFERER
+              value: true
+            - name: BASE_URL
+              value: https://pricewatcher.sidhulabs.ca
+            - name: FETCH_WORKERS
+              value: 10
+        - name: changedetection
+          image: dgtlmoon/sockpuppetbrowser:latest
+          imagePullPolicy: "Always"
+          securityContext:
+            allowPrivilegeEscalation: true
+          env:
+            - name: SCREEN_WIDTH
+              value: 1920
+            - name: SCREEN_HEIGHT
+              value: 1024
+            - name: SCREEN_DEPTH
+              value: 16
+            - name: MAX_CONCURRENT_CHROME_PROCESSES
+              value: 10
+      volumes:
+        - name: changedetection-data
+          persistentVolumeClaim:
+            claimName: changedetection-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: changedetection
+  labels:
+    app: changedetection
+spec:
+  ports:
+    - port: 5000
+      protocol: TCP
+  selector:
+    app: changedetection
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: changedetection
+spec:
+  rules:
+  - host: pricewatcher.sidhulabs.ca
+    http:
+      paths:
+      - backend:
+          service:
+            name: changedetection
+            port:
+              number: 5000
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.10.1.51
+    - ip: 10.10.1.52
+    - ip: 10.10.1.53
+    - ip: 10.10.1.54
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: changedetection-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 214748364800m
+  storageClassName: longhorn
+  volumeMode: Filesystem
+  volumeName: pvc-6ac5a07b-fd5c-41e2-85e2-26282caef5f4
+
+
+
+

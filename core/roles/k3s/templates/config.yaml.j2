@@ -1,0 +1,14 @@
+token-file: {{ k3s_token_file }}
+
+{% if inventory_hostname == groups['k3s_master'][0] %}
+cluster-init: true
+{% else %}
+server: https://{{ control_plane_endpoint }}:6443
+{% endif %}
+
+{% if 'k3s_master' in group_names %}
+tls-san: {{ control_plane_endpoint }}
+write-kubeconfig-mode: 644
+node-taint:
+  - CriticalAddonsOnly=true:NoExecute
+{% endif %}

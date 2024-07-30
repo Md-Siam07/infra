@@ -165,3 +165,5 @@ pgdata/
 
 # Notebooks
 **.ipynb
+
+**kubeconfig.yaml

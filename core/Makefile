@@ -1,3 +1,4 @@
+.PHONY: k3s
 
 traefik:
 	ansible-playbook --inventory inventory.yml traefik.yml
@@ -7,6 +8,9 @@ eagent:
 
 nginx:
 	ansible-playbook --inventory inventory.yml nginx.yml
+
+k3s:
+	ansible-playbook --inventory inventory.yml k3s.yml
 
 install:
 	python3 -m pip install ansible

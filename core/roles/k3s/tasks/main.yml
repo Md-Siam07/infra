@@ -1,0 +1,74 @@
+- name: Ensure config directories exist
+  become: yes
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0777
+  loop:
+    - /etc/rancher/k3s
+    - /etc/rancher/node
+    - "{{ k3s_data_dir }}/agent/pod-manifests"
+
+- name: Copy k3s config files
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0644
+  loop:
+    - src: config.yaml.j2
+      dest: "{{ k3s_config_file }}"
+
+- name: Check if k3s token file exists on the first node
+  run_once: true
+  ansible.builtin.stat:
+    path: "{{ k3s_token_file }}"
+  register: k3s_token_file_stat
+
+- name: Generate k3s token file on the first node if not exist yet
+  run_once: true
+  when: not k3s_token_file_stat.stat.exists
+  ansible.builtin.copy:
+    content: "{{ lookup('community.general.random_string', length=32) }}"
+    dest: "{{ k3s_token_file }}"
+    mode: 0600
+
+- name: Get k3s token from the first node
+  become: true
+  run_once: true
+  ansible.builtin.slurp:
+    src: "{{ k3s_token_file }}"
+  register: k3s_token_base64
+
+- name: Ensure all nodes has the same token
+  ansible.builtin.copy:
+    content: "{{ k3s_token_base64.content | b64decode }}"
+    dest: "{{ k3s_token_file }}"
+    mode: 0600
+
+- name: Start master nodes
+  when: "'k3s_master' in group_names"
+  shell: 
+    cmd: curl -sfL https://get.k3s.io | sh -s - server
+  environment:
+    INSTALL_K3S_VERSION: "{{ k3s_version }}"
+
+- name: Start minion nodes
+  when: "'k3s_minion' in group_names"
+  shell: 
+    cmd: curl -sfL https://get.k3s.io | sh -s - agent
+  environment:
+    INSTALL_K3S_VERSION: "{{ k3s_version }}"
+
+- name: Get Kubernetes config file
+  run_once: true
+  ansible.builtin.slurp:
+    src: "{{ k3s_kubeconfig_file }}"
+  register: kubeconfig_base64
+
+- name: Write Kubernetes config file with the correct cluster address
+  ansible.builtin.copy:
+    content: "{{ kubeconfig_base64.content | b64decode | replace('127.0.0.1', '10.10.1.56') }}"
+    dest: "{{ playbook_dir }}/kubeconfig.yaml"
+    mode: 0600
+  delegate_to: localhost
+  run_once: true
