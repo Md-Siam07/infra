@@ -55,7 +55,7 @@
 - name: Start minion nodes
   when: "'k3s_minion' in group_names"
   shell: 
-    cmd: curl -sfL https://get.k3s.io | sh -s - agent
+    cmd: curl -sfL https://get.k3s.io | K3S_URL=https://"{{ control_plane_endpoint }}":6443 K3S_TOKEN_FILE="{{ k3s_token_file }}" sh -s - 
   environment:
     INSTALL_K3S_VERSION: "{{ k3s_version }}"
 

@@ -1,14 +1,11 @@
 token-file: {{ k3s_token_file }}
 
-{% if inventory_hostname == groups['k3s_master'][0] %}
-cluster-init: true
-{% else %}
-server: https://{{ control_plane_endpoint }}:6443
-{% endif %}
-
 {% if 'k3s_master' in group_names %}
+datastore-endpoint: postgres://k3s:{{ lookup('env', 'DB_PASS') }}@10.10.1.55:5432/k3s?sslmode=disable
 tls-san: {{ control_plane_endpoint }}
 write-kubeconfig-mode: 644
 node-taint:
   - CriticalAddonsOnly=true:NoExecute
+{% else %}
+server: https://{{ control_plane_endpoint }}:6443
 {% endif %}
