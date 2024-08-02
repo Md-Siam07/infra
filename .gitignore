@@ -167,3 +167,9 @@ pgdata/
 **.ipynb
 
 **kubeconfig.yaml
+*.iso
+*.log
+*.png
+*.tgz
+*kubeconfig.yaml
+Chart.lock

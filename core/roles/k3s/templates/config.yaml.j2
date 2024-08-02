@@ -1,7 +1,7 @@
 token-file: {{ k3s_token_file }}
 
 {% if 'k3s_master' in group_names %}
-datastore-endpoint: postgres://k3s:{{ lookup('env', 'DB_PASS') }}@10.10.1.55:5432/k3s?sslmode=disable
+datastore-endpoint: postgres://k3s:{{ lookup('env', 'K3S_DB_PASS') }}@10.10.1.55:5432/k3s?sslmode=disable
 tls-san: {{ control_plane_endpoint }}
 write-kubeconfig-mode: 644
 node-taint:
