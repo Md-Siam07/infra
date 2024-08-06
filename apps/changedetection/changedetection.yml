@@ -32,7 +32,7 @@ spec:
               value: https://pricewatcher.sidhulabs.ca
             - name: FETCH_WORKERS
               value: "10"
-        - name: changedetection
+        - name: playwright-chrome
           image: dgtlmoon/sockpuppetbrowser:latest
           imagePullPolicy: "Always"
           securityContext:

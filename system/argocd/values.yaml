@@ -24,6 +24,7 @@ argocd-apps:
             revision: &revision main
             directories:
               - path: apps/*
+              - path: system/*
       template:
         metadata:
             name: '{{path.basename}}'
