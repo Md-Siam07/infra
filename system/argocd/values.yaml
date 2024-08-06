@@ -13,3 +13,18 @@ argo-cd:
   server:
     ingress:
       enabled: true
+
+  argocd-apps:
+  applicationsets:
+    root:
+      generators:
+        - git:
+            repoURL: &repoURL https://github.com/sidhulabs/infra
+            revision: &revision main
+            directories:
+              - path: apps/*
+      template:
+        spec:
+          source:
+            repoURL: *repoURL
+            targetRevision: *revision
