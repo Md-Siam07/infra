@@ -82,15 +82,6 @@ http:
         - default-whitelist
       tls: {}
       service: nas
-    jupyter:
-      entryPoints:
-        - "https"
-      rule: "Host(`jupyter.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: jupyter
     freeipa:
       entryPoints:
         - "https"
@@ -99,25 +90,6 @@ http:
         - default-headers
       tls: {}
       service: ad
-    remote:
-      entryPoints:
-        - "https"
-      rule: "Host(`remote.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - addprefix-remote
-        - default-whitelist
-      tls: {}
-      service: remote
-    files:
-      entryPoints:
-        - "https"
-      rule: "Host(`files.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: files
     tv:
       entryPoints:
         - "https"
@@ -154,33 +126,6 @@ http:
         - default-whitelist
       tls: {}
       service: bazarr
-    heimdall:
-      entrypoints:
-        - "https"
-      rule: "host(`home.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: heimdall
-    superset:
-      entrypoints:
-        - "https"
-      rule: "host(`superset.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: superset
-    prefect:
-      entrypoints:
-        - "https"
-      rule: "host(`prefect.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: prefect
     mlflow:
       entrypoints:
         - "https"
@@ -190,15 +135,6 @@ http:
         - default-whitelist
       tls: {}
       service: mlflow
-    realestatehub:
-      entrypoints:
-        - "https"
-      rule: "host(`realestate.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-        - default-whitelist
-      tls: {}
-      service: realestatehub
     argocd:
       entrypoints:
         - "https"
@@ -244,23 +180,15 @@ http:
         - default-whitelist
       tls: {}
       service: draw
-    mage:
+    changedetection:
       entrypoints:
         - "https"
-      rule: "host(`mage.sidhulabs.ca`)"
+      rule: "host(`pricewatcher.sidhulabs.ca`)"
       middlewares:
         - default-headers
         - default-whitelist
       tls: {}
-      service: mage
-    sports:
-      entrypoints:
-        - "https"
-      rule: "host(`sports.sidhulabs.ca`)"
-      middlewares:
-        - default-headers
-      tls: {}
-      service: sports
+      service: changedetection
 #endregion
 #region services
   services:
@@ -309,11 +237,6 @@ http:
         servers:
           - url: "10.10.1:55:5432"
         passHostHeader: true
-    jupyter:
-      loadBalancer:
-        servers:
-          - url: "https://10.10.1.56:443"
-        passHostHeader: true
     plex:
       loadBalancer:
         servers:
@@ -323,16 +246,6 @@ http:
       loadBalancer:
         servers:
           - url: "http://10.10.1.20:80"
-        passHostHeader: true
-    remote:
-      loadBalancer:
-        servers:
-          - url: "http://10.10.1.56:80"
-        passHostHeader: true
-    files:
-      loadBalancer:
-        servers:
-          - url: "http://10.10.1.29:8080"
         passHostHeader: true
     tv:
       loadBalancer:
@@ -354,27 +267,7 @@ http:
         servers:
           - url: "http://10.10.1.29:6767"
         passHostHeader: true
-    heimdall:
-      loadBalancer:
-        servers:
-          - url: "https://10.10.1.56:443"
-        passHostHeader: true
-    superset:
-      loadBalancer:
-        servers:
-          - url: "http://10.10.1.56:80"
-        passHostHeader: true
-    prefect:
-      loadBalancer:
-        servers:
-          - url: "http://10.10.1.56:80"
-        passHostHeader: true
     mlflow:
-      loadBalancer:
-        servers:
-          - url: "http://10.10.1.56:80"
-        passHostHeader: true
-    realestatehub:
       loadBalancer:
         servers:
           - url: "http://10.10.1.56:80"
@@ -404,12 +297,7 @@ http:
         servers:
           - url: "http://10.10.1.56:80"
         passHostHeader: true
-    mage:
-      loadBalancer:
-        servers:
-          - url: "http://10.10.1.56:80"
-        passHostHeader: true
-    sports:
+    changedetection:
       loadBalancer:
         servers:
           - url: "http://10.10.1.56:80"
@@ -419,9 +307,6 @@ http:
     addprefix-pihole:
       addPrefix:
         prefix: "/admin"
-    addprefix-remote:
-      addPrefix:
-        prefix: "/guacamole"
     https-redirect:
       redirectScheme:
         scheme: https
