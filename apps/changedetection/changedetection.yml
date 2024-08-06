@@ -25,13 +25,13 @@ spec:
             mountPath: /datastore
           env:
             - name: PLAYWRIGHT_DRIVER_URL
-              value: ws://playwright-chrome:3000
+              value: "ws://playwright-chrome:3000"
             - name: HIDE_REFERER
-              value: true
+              value: "true"
             - name: BASE_URL
               value: https://pricewatcher.sidhulabs.ca
             - name: FETCH_WORKERS
-              value: 10
+              value: "10"
         - name: changedetection
           image: dgtlmoon/sockpuppetbrowser:latest
           imagePullPolicy: "Always"
@@ -39,13 +39,13 @@ spec:
             allowPrivilegeEscalation: true
           env:
             - name: SCREEN_WIDTH
-              value: 1920
+              value: "1920"
             - name: SCREEN_HEIGHT
-              value: 1024
+              value: "1024"
             - name: SCREEN_DEPTH
-              value: 16
+              value: "16"
             - name: MAX_CONCURRENT_CHROME_PROCESSES
-              value: 10
+              value: "10"
       volumes:
         - name: changedetection-data
           persistentVolumeClaim:

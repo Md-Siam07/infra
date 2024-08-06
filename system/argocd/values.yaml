@@ -14,9 +14,10 @@ argo-cd:
     ingress:
       enabled: true
 
-  argocd-apps:
+argocd-apps:
   applicationsets:
     root:
+      namespace: argocd
       generators:
         - git:
             repoURL: &repoURL https://github.com/sidhulabs/infra
@@ -24,7 +25,28 @@ argo-cd:
             directories:
               - path: apps/*
       template:
+        metadata:
+            name: '{{path.basename}}'
         spec:
+          destination:
+            name: in-cluster
+            namespace: '{{path.basename}}'
           source:
             repoURL: *repoURL
+            path: '{{path}}'
             targetRevision: *revision
+          project: default
+          syncPolicy:
+            automated:
+              prune: true
+              selfHeal: true
+            retry:
+              limit: 10
+              backoff:
+                duration: 1m
+                factor: 2
+                maxDuration: 16m
+            syncOptions:
+              - CreateNamespace=true
+              - ApplyOutOfSyncOnly=true
+              - ServerSideApply=true
