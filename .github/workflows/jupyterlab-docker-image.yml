@@ -4,9 +4,9 @@ on:
   # workflow_dispatch:
   push:
     branches: [ main ]
-    paths:
-      - "docker-images/jupyterlab/**"
-      - "!docker-images/jupyterlab/README.md"
+    # paths:
+    #   - "docker-images/jupyterlab/**"
+    #   - "!docker-images/jupyterlab/README.md"
 
 jobs:
   build:
