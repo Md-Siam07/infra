@@ -29,6 +29,6 @@ jobs:
         with:
           context: docker-images/jupyterlab
           push: true
-          tags: bigsidhu/jupyter-notebook:latest,bigsidhu/jupyter-notebook:${{ github.sha }}
+          tags: mdsiam07/jupyter-notebook:latest,mdsiam07/jupyter-notebook:${{ github.sha }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
